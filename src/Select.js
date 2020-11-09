@@ -13,26 +13,35 @@ import PropTypes from 'prop-types';
 class Select extends React.Component {
   static propTypes = {
     options: PropTypes.array,
+    defaultValue: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
   };
   static defaultProps = {
     options: [],
-    value: '',
-    onChange: () => {},
+    defaultValue: '',
+    value: undefined,
+    onChange: undefined,
   }
 
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
-      selectedValue: '',
+      selectedValue: this.props.defaultValue,
       optionsVisble: false,
     };
   }
 
+  static getDerivedStateFromProps(props) {
+    const result = props.value === undefined ? null : { selectedValue: props.value };
+    
+    return result;
+  }
+
   componentDidMount () {
-    const { options, value } = this.props;
+    const { options } = this.props;
+    const { selectedValue } = this.state;
     // ref是用来获取DOM节点的
     // this.nv.addEventListener('click', this.selectFn);
     //或者
@@ -41,13 +50,13 @@ class Select extends React.Component {
 
     // 点击空白区域，optionsDiv隐藏
     document.addEventListener('click', (e) => { this.disabledOptionsDiv(e) });
-    let selectedValue = '';
-    options.map((option) => {
-      if (option.value === value) {
-        selectedValue = option.label;
-      }
-    })
-    this.setState({ selectedValue });
+    // let selectedValues = '';
+    // options.map((option) => {
+    //   if (option.value === selectedValue) {
+    //     selectedValues = option.value;
+    //   }
+    // })
+    // this.setState({ selectedValue: selectedValues });
   }
 
   // selectFn = () => {
@@ -64,15 +73,19 @@ class Select extends React.Component {
   }
 
   handleClickChange = (e, option) => {
-    console.log(option, 'option');
-    const { onChange } = this.props;
+    const { onChange, value } = this.props;
 
     this.setState({
-      selectedValue: option.label,
       optionsVisble: false,
     });
 
-    onChange(option);
+    if (onChange) {
+      onChange(option);
+    }
+
+    if (!value) {
+      this.setState({ selectedValue: option.value });
+    }
   }
 
   handleSelectClick = () => {
@@ -81,28 +94,34 @@ class Select extends React.Component {
   };
 
   render() {
+
     const { selectedValue, optionsVisble } = this.state;
-    const { options, value } = this.props;
-    console.log(value, '父传递的value');
-    const checked = value === selectedValue;
-    console.log(checked, 'checked===', value, selectedValue);
+    const { options } = this.props;
+    let customContent = '';
+    options.forEach((option) => {
+      console.log(selectedValue, 'selectedValue');
+      if (option.value === selectedValue) {
+        console.log('111');
+        customContent = option.custom;
+      }
+    })
 
     return (
       <div>
-        <div className="select" onClick={this.handleSelectClick}>{selectedValue}</div>
+        <div className="select" onClick={this.handleSelectClick}>{customContent}</div>
         {
           optionsVisble && (
             <div className="optionsDiv">
               {
                 options.map((option) => (
                   <div
-                    className={ option.value === value ? 'active' : null}
+                    className={ option.value === selectedValue ? 'active' : null}
                     style={{ marginTop: '8px' }}
                     key={option.key}
-                    value={option.value}
+                    // value={option.value}
                     onClick={(e) => {this.handleClickChange(e, option)}}
                   >
-                  {option.value}
+                  {option.label}
                   </div>
                 ))
               }

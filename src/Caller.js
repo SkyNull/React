@@ -4,20 +4,24 @@ import Select from './Select';
 const optionsArry = [
   {
     key: 'time_desc',
-    value: '时间从近到远',
-    label: '时间',
+    value: 'time_desc',
+    label: '时间从近到远',
+    custom: '时间',
   }, {
     key: 'time_asc',
-    value: '时间从远到近',
-    label: '时间',
+    value: 'time_asc',
+    label: '时间从远到近',
+    custom: '时间',
   }, {
     key: 'priority_desc',
-    value: '优先级从高到低',
-    label: '优先级',
+    value: 'priority_desc',
+    label: '优先级从高到低',
+    custom: '优先级',
   }, {
     key: 'priority_asc',
-    value: '优先级从低到高',
-    label: '优先级',
+    value: 'priority_asc',
+    label: '优先级从低到高',
+    custom: '优先级',
   },
 ];
 
@@ -26,12 +30,11 @@ class Caller extends React.Component {
     super();
 
     this.state = {
-      valueSelected: '优先级从高到低',
+      valueSelected: 'priority_desc',
     };
   }
 
   handleValueChange = (option) => {
-    console.log(option, '子返回的option');
     this.setState({
       valueSelected: option.value,
     });
@@ -42,6 +45,7 @@ class Caller extends React.Component {
     return (
       <Select
         options={optionsArry}
+        // defaultValue="priority_desc"
         value={valueSelected}
         onChange={this.handleValueChange}
       />
