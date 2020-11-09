@@ -1,16 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dialog from './component/Dialog';
+import Caller from './Caller';
+import Input from './Input';
 
-let root =document.querySelector('#root');
+function Controlled() {
+  const [value, setValue] = React.useState('初始值');
+  return <Input value={value} onChange={setValue}/>;
+}
 
-ReactDOM.render(<div>
-    {/* 注释：JSX中调取组件，只需要把组件当作一个标签调取使用即可（单闭合和双闭合均可） */}
-    <Dialog con='哈哈哈' style={{color:'red'}}/>
-    <Dialog con = '呐呐呐' lx={2}>
-        <span> 1</span>
-        <span>2</span>
-    </Dialog>
-    {/* 属性值不是字符串，我们需要使用大括号包起来 */}
+function Uncontrolled() {
+  return <Input defaultValue="初始值" />
+}
 
-</div>,root);
+ReactDOM.render(
+  <>
+    <div style={{ marginBottom: '8px' }}>
+      <label style={{ width: '100px', display: 'inline-block' }}>Uncontrolled</label>
+      <Uncontrolled />
+    </div>
+    <div>
+      <label style={{ width: '100px', display: 'inline-block' }}>Controlled</label>
+      <Controlled />
+    </div>
+  </>,
+  document.getElementById('root')
+)

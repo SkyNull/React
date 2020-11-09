@@ -1,0 +1,74 @@
+.wrapper {
+  width: 500px;
+  font-size: 14px;
+  margin: 16px auto;
+  border-radius: 4px;
+  box-shadow: 0px 0px  4px #d7d7d7;
+  padding: 20px;
+
+  .commentInput {
+    padding: 16px;
+    border: 1px solid #d7d7d7;
+    .form {
+      margin-bottom: 8px;
+      label {
+        display: inline-block;
+        width: 100px;
+      }
+      input {
+        width: 300px;
+        height: 20px;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        padding: 4px;
+      }
+      textarea {
+        width: 300px;
+        height: 112px;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        padding: 4px;
+      }
+    }
+
+    .commentButton {
+      text-align: right;
+      button {
+        border: none;
+        outline: none;
+        width: 60px;
+        padding: 6px 10px;
+        border-radius: 4px;
+        background-color: #00a3cf;
+        color: white;
+      }
+    }
+  }
+
+  .comment {
+    max-height: 70px;
+    margin-top: 16px;
+    border-bottom: 1px solid #d7d7d7;
+    padding-bottom: 16px;
+    position: relative;
+    max-height: 50px;
+    .username {
+      display: inline-block;
+      color: #00a3cf;
+      font-style: italic;
+    }
+    p {
+      display: inline-block;
+    }
+    .deleteIcon {
+      position: absolute;
+      right: 16px;
+      top: 8px;
+    }
+    .time {
+      position: absolute;
+      right: 8px;
+      top: 40px;
+    }
+  }
+}
