@@ -15,7 +15,7 @@ class InputCaller extends React.Component {
 
   render() {
     const { content } = this.state;
-    return(
+    return(     
       <Input value={content} onChange={this.handleValueChange}/>
     )
   }

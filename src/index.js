@@ -1,29 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Caller from './Caller';
-// import Input from './Input';
-import InputCaller from './InputCaller';
-
-// function Controlled() {
-//   const [value, setValue] = React.useState('初始值');
-//   return <Input value={value} onChange={setValue}/>;
-// }
-
-// function Uncontrolled() {
-//   return <Input defaultValue="初始值" />
-// }
+import CheckboxCaller from './CheckboxCaller';
 
 ReactDOM.render(
-  // <>
-  //   <div style={{ marginBottom: '8px' }}>
-  //     <label style={{ width: '100px', display: 'inline-block' }}>Uncontrolled</label>
-  //     <Uncontrolled />
-  //   </div>
-  //   <div>
-  //     <label style={{ width: '100px', display: 'inline-block' }}>Controlled</label>
-  //     <Controlled />
-  //   </div>
-  // </>,
-  <Caller />,
-  document.getElementById('root')
-)
+    <CheckboxCaller />,
+    document.getElementById('root')
+);
